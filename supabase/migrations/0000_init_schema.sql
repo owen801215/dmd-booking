@@ -1,8 +1,20 @@
 -- =====================
--- 1. 服務與設計師關聯表 (依文件所述，假設已有 stylists, services, stylist_services)
+-- 1. 基礎資料表 (設計師與服務項目)
 -- =====================
+CREATE TABLE stylists (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  name TEXT NOT NULL,
+  nickname TEXT,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT now()
+);
 
--- =====================
+CREATE TABLE services (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  name TEXT NOT NULL,
+  duration INT NOT NULL, -- 預設服務長度(分鐘)
+  price INT NOT NULL DEFAULT 0,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT now()
+);-- =====================
 -- 2. 設計師常規班表
 -- =====================
 CREATE TABLE stylist_schedules (
